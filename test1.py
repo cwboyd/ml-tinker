@@ -1,6 +1,7 @@
 
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers.modeling_utils import PreTrainedModel
 
 # A tiny model that's ~20MB.
 model_name = "prajjwal1/bert-tiny"
@@ -11,9 +12,9 @@ tokenizer.save_pretrained(f"cache1/tokenizer/{model_name}")
 
 # Create a model, download & save that to disk.
 # These are the weights.
-model = AutoModelForCausalLM.from_pretrained(model_name, is_decoder=True)
+model = PreTrainedModel.from_pretrained(model_name, is_decoder=True)
 model.save_pretrained(f"cache1/model/{model_name}")
 
 # Load back from disk.
 tokenizer2 = AutoTokenizer.from_pretrained(f"cache1/tokenizer/{model_name}")
-model2 = AutoModelForCausalLM.from_pretrained(f"cache1/model/{model_name}")
+#model2 = AutoModelForCausalLM.from_pretrained(f"cache1/model/{model_name}")
